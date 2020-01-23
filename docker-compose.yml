@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    env_file: mysql_config.env
+    networks:
+      - main
+    volumes:
+      - /home/ameo/demo/demo
+
+  web:
+    build: .
+    image: ameo_demo
+    command: python manage.py runserver 0.0.0.0:8005
+    depends_on:
+      - db
+    networks:
+      - main
+    env_file: config.env
+    volumes:
+      - /home/ameo/demo/demo
+    ports:
+      - "8003:8005"
+networks:
+  main:
+    driver: bridge

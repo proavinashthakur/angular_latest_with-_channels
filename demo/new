@@ -1,0 +1,1 @@
+cat dev.sql | docker exec -i demo_db_1_b65925d80644 /usr/bin/mysql -u root --password=root dev
